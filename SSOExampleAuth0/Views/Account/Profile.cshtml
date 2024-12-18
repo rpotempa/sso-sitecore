@@ -1,0 +1,201 @@
+﻿@model SampleMvcApp.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <h2>@ViewData["Title"].</h2>
+
+            <div class="col-md-2">
+                <img src="@Model.ProfileImage"
+                     alt="" class="img-rounded img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <h3>@Model.Name</h3>
+                <p>
+                    <i class="glyphicon glyphicon-envelope"></i> @Model.EmailAddress
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>Claims associated with current User</h3>
+        <p>This page displays all the claims associated the the current User. This is useful when debugging to see which claims are being populated from the Auth0 ID Token.</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Claim
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in User.Claims)
+                {
+                    <tr>
+                        <td>@claim.Type</td>
+                        <td>@claim.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>Tokens</h3>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Token
+                    </th>
+                    <th>
+                        Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var token in Model.SecurityTokens)
+                {
+                    <tr>
+                        <td>@token.Name</td>
+                        <td>@token.Token</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Let's see some dat from API</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>Contacts</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Phone Number
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Contacts != null)
+                {
+                    @foreach (var contact in Model.Contacts)
+                    {
+                        <tr>
+                            <td>@contact.FirstName</td>
+                            <td>@contact.LastName</td>
+                            <td>@contact.PhoneNumber</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>Todos</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Todos != null)
+                {
+                    @foreach (var todo in Model.Todos)
+                    {
+                        <tr>
+                            <td>@todo.Name</td>
+                            <td>@todo.Description</td>
+                            <td>@todo.DueDate</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>Weather Forecast</h3>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Temperature C
+                    </th>
+                    <th>
+                        Temperature F
+                    </th>
+                    <th>
+                        Summary
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WeatherForcasts != null)
+                {
+                    @foreach (var weather in Model.WeatherForcasts)
+                    {
+                        <tr>
+                            <td>@weather.Date</td>
+                            <td>@weather.TemperatureC</td>
+                            <td>@weather.TemperatureF</td>
+                            <td>@weather.Summary</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
