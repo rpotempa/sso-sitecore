@@ -1,0 +1,35 @@
+﻿﻿@using Sitecore
+@using Sitecore.Mvc
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+
+
+@model DockerExamples.SSO.Models.Login
+
+@{
+    var user = Sitecore.Context.User;
+    var userRoles = string.Join(", ", Sitecore.Context.User.Roles.Select(x => x.DisplayName));
+}
+
+<h3>
+    @if (!user.IsAuthenticated)
+    {
+        <a href="@Model.SignInUrl">Login</a>
+    }
+    else
+    {
+        <a href="@Model.SignOutUrl">Logout</a>
+    }
+</h3>
+
+</br></br>
+<h3>User data:</h3>
+<div>
+    <p>Is Authenticated: @user.IsAuthenticated</p>
+    <p>LocalName: @user.LocalName</p>
+    <p>Name: @user.Profile.Name</p>
+    <p>FullName: @user.Profile.FullName</p>
+    <p>Domain: @user.GetDomainName()</p>
+    <p>Profile Email: @user.Profile.Email</p>
+    <p>Roles: @userRoles</p>
+</div>
